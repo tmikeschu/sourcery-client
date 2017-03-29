@@ -1,4 +1,6 @@
 # Sourcery (client)
+[![Build Status](https://travis-ci.org/tmikeschu/sourcery-client.png)](https://travis-ci.org/tmikeschu/sourcery-client)
+
 
 ### About This
 

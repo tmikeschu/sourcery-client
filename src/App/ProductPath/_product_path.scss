@@ -1,0 +1,22 @@
+.product-path {
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+  margin: 10px auto;
+  width: 80%;
+  justify-content: space-around;
+  .start, .finish {
+    align-self: stretch;
+    color: #fff;
+    display: flex;
+    padding: 1%;
+    flex-flow: column nowrap;
+    justify-content: center;
+  }
+  .start {
+    background-color: #4CBB17;
+  }
+  .finish {
+    background-color: #8E2323;
+  }
+}
