@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Header from './Header/Header';
-import ProductPath from './ProductPath/ProductPath';
+import ProductSearch from './ProductSearch/ProductSearch';
+import Map from './Map/Map';
+// import axios from 'axios';
+import { paths, productAddress } from './utils/static-data.js';
 
 import './App.css';
 //import Web3 from 'web3';
@@ -15,45 +18,66 @@ import './App.css';
 //const piggyBank = ETHERIUM_CLIENT.eth.contract(peopleContractAbi).at(peopleContractAddress)
 // _.getPeople()
 
-// const locationAddresses = ['1', '2', '3'];
-
-const coffeeLocations = [
-  { lat: 79, lng: 10, name: 'Coffee Grower', type: 'origin' },
-  { lat: 7, lng: 19, name: 'Delivery Service', type: 'transport' },
-  { lat: 8, lng: 52, name: 'Cafe', type: 'restaurant' } 
-];
-
-const grapesLocations = [
-  { lat: 79, lng: 10, name: 'Vinyard', type: 'origin' },
-  { lat: 8, lng: 52, name: 'Winery', type: 'business' } 
-];
-
-const goods = [ 
-  { name: 'coffee', locations: coffeeLocations },
-  { name: 'grapes', locations: grapesLocations },
-];
 
 export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      goods: goods
-    }
+      productAddress: productAddress,
+      paths: [],
+      displayedPaths: [],
+      query: '',
+      goodSearch: true,
+    };
+    this.handlePathViewClick = this.handlePathViewClick.bind(this);
+    this.viewAllPaths = this.viewAllPaths.bind(this);
+    this.findProductPaths = this.findProductPaths.bind(this);
+    this.updateQuery = this.updateQuery.bind(this);
+  }
+
+  handlePathViewClick(path) {
+    this.setState({
+      displayedPaths: [path]
+    });
+  }
+
+  viewAllPaths() {
+    this.setState({
+      displayedPaths: this.state.paths
+    });
+  }
+
+  findProductPaths() {
+    this.setState({
+      paths: paths[this.state.query] || [],
+      query: '',
+      displayedPaths: [],
+      goodSearch: paths[this.state.query]
+    }); 
+  }
+
+  updateQuery(event) {
+    this.setState({
+      query: event.target.value
+    });
   }
 
   render() {
-    const productPaths = this.state.goods.map((good, i) => {
-      return (
-        <ProductPath 
-          good={good} 
-          key={i} />
-      );
-    });
-
     return (
       <div className="App">
         <Header />
-        { productPaths }
+        <main>
+          <ProductSearch 
+            paths={this.state.paths} 
+            handlePathViewClick={this.handlePathViewClick}
+            viewAllPaths={this.viewAllPaths}
+            findProductPaths={this.findProductPaths}
+            query={this.state.query}
+            updateQuery={this.updateQuery}
+            goodSearch={this.state.goodSearch}
+          />
+          <Map paths={this.state.displayedPaths} />
+        </main>
       </div>
     );
   }

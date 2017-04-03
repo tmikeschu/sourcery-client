@@ -1,0 +1,16 @@
+.product-search {
+  li {
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+    align-items: center;
+    button {
+      background-color: $cream;
+      margin: 10px 0;
+      &:hover, &:focus {
+        background-color: $blue;
+        color: #fff;
+      }
+    }
+  }
+}
