@@ -38,9 +38,17 @@ cd sourcery-client/
 // install dependencies
 npm install
 
-// run the tests
-npm test
-// then 'a' then 'q'
+// run all the tests
+npm run testAll
+// End-to-end tests will start upon 'q'uitting the Jest runner.
+
+// run the Enzyme/Jest tests
+npm run test
+// then 'a' then 'q', 
+
+// run the end-to-end tests in Nightwatch.js independently
+npm run e2e
+
 
 // start the server
 npm start

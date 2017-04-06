@@ -5,6 +5,7 @@
   "devDependencies": {
     "enzyme": "^2.8.0",
     "jest-enzyme": "^2.1.2",
+    "nightwatch": "^0.9.14",
     "node-sass": "^4.5.1",
     "npm-run-all": "^4.0.2",
     "react-addons-test-utils": "^15.4.2",
@@ -15,6 +16,7 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-google-maps": "^4.11.0",
+    "selenium-webdriver": "^3.3.0",
     "web3": "^0.18.2"
   },
   "scripts": {
@@ -24,6 +26,8 @@
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm run build-css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "testAll": "react-scripts test --env=jsdom && nightwatch",
+    "e2e": "node_modules/.bin/nightwatch --config nightwatch.conf.js",
     "eject": "react-scripts eject"
   }
 }
