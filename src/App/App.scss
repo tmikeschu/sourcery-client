@@ -6,3 +6,16 @@
 @import './Header/header.scss';
 @import './ProductPath/Location/location.scss';
 @import './ProductPath/product_path.scss';
+@import './ProductSearch/product_search.scss';
+@import './Map/map.scss';
+
+html, body {
+  height: 100%;
+}
+
+main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}

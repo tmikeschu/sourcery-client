@@ -6,6 +6,7 @@ export default class Header extends Component {
     return (
       <header className="header">
         <h1>Sourcery</h1>
+        <a href="#">Sign in to log a checkpoint</a>
       </header>
     );
   }

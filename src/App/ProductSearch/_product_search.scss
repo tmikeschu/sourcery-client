@@ -1,0 +1,35 @@
+@import './ProductSearchItem/product_search_item.scss';
+.product-search {
+  min-width: 300px;
+  margin-left: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+  input {
+    margin: 10px 0;
+    border: none;
+    &[type="text"] {
+      width: 90%;
+      font-size: 1.2em;
+    }
+    &[type="submit"] {
+      width: 90%;
+      font-size: 1em;
+      background: $blue;
+      color: #fff;
+      &:hover, &:focus {
+        background: $teal; 
+        cursor: pointer;
+      }
+    }
+  }
+
+  >button {
+    width: 90%;
+    background: $blue;
+    color: #fff;
+    font-size: 1em;
+    &:hover, &:focus {
+      background-color: $teal;
+    }
+  }
+}

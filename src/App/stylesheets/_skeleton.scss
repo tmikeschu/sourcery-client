@@ -1,7 +1,7 @@
 body {
   background-color: #D3D3D3;
 }
-body, h1, h2, h3, p, ul {
+body, h1, h2, h3, p, ul, input, a {
   font-family: $font;
 }
 
@@ -15,4 +15,21 @@ h2 {
 
 h3 {
   font-size: 2em;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+  &:hover, &:focus {
+    cursor: point;
+    font-weight: bold;
+  }
+}
+
+button, input[type="submit"] {
+  border: none;
+  font-family: $font;
+  &:hover, &:focus {
+    cursor: pointer;
+  }
 }

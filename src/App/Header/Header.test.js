@@ -10,7 +10,11 @@ describe('<Header />', () => {
 
   it('has a Sourcery heading', () => {
     const header = shallow(<Header />); 
-    const title = <h1>Sourcery</h1>;
-    expect(header.contains(title)).toBeTruthy(); 
+    expect(header.contains(
+      <header className="header">
+        <h1>Sourcery</h1>
+        <a href="#">Sign in to log a checkpoint</a>
+      </header>
+    )).toBeTruthy(); 
   });
 });

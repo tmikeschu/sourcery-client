@@ -9,9 +9,9 @@ you know where you coffee *really* came from? Is your apple truly from a
 sustainable farm? This app addresses these problems by adding visibility to the supply chain process by allowing users to add, update, and
 read transactions on the Ethereum blockchain.
 
-This React.js app will fetch transation data from a simple [smart-contract ecosystem]() on the
+This React.js app will fetch transation data from a simple [smart-contract ecosystem](https://github.com/ethanbennett/sourcery) on the
 Ethereum blockchain. Information about these goods and transactions (name, price, location, &c) will be
-fetched from a [Rails API service]().
+fetched from a [Rails API service](https://github.com/DavidKnott/sourcery-api).
 
 We are just getting started on this project. Eventually, users will be able to
 visit the root page and view a list of items and their respective supply chain
@@ -24,9 +24,10 @@ change of possession (e.g., between producer and transport).
 
 ### About Us
 
-We are a group of four [Turing School]() students, and this is our capstone
+We are a group of four [Turing School](https://www.turing.io/) students, and this is our capstone
 project for the back-end engineering program. You can learn more about our
-development process at these links: [DTR (team expectations)](), [stand-ups](), [Pivotal Tracker]().
+development process at these links: [DTR (team expectations)](https://gist.github.com/tmikeschu/1a37eef7724f06421d8bca19fd8be8ad), [stand-ups](https://gist.github.com/tmikeschu/14555f11f0d24d7c09749519c7b04337), [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/1996565).
+And more about us at these ones: [Nick](https://github.com/ski-climb), [David](https://github.com/DavidKnott), [Ethan](https://github.com/ethanbennett), [Mike](https://github.com/tmikeschu).
 
 ### Environment Setup
 
