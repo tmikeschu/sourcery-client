@@ -5,6 +5,7 @@ import { paths, productAddress, addresses } from './utils/static-data.js';
 import CreateCheckpoint from './CreateCheckpoint/CreateCheckpoint';
 import CreateLot from './CreateLot/CreateLot';
 import Mapp from './Mapp/Mapp';
+import apiService from './apiService';
 import axios from 'axios';
 import { paths, productAddress, addresses } from './utils/static-data.js';
 import { pathsControllerContractAbi, pathsControllerAddress } from './ethereum/EthereumData';
@@ -23,21 +24,16 @@ export default class App extends Component {
       displayedPaths: [],
       query: '',
       goodSearch: true,
-      service: axios.create({
-        baseURL: process.env.NODE_ENV === 'production' 
-        ? "https://sourcery-api.herokuapp.com" 
-        : "http://localhost:9000" 
-      }),
       checkpoint: {street_adress: "", longitude: "", latitude: "",
                   creator: "", city: "", state: "", country: ""},
-      lot: {name:""}
+      lot: {name:""},
+      apiService: new apiService()
     };
     this.handlePathViewClick = this.handlePathViewClick.bind(this);
     this.viewAllPaths = this.viewAllPaths.bind(this);
     this.findProductPaths = this.findProductPaths.bind(this);
     this.updateQuery = this.updateQuery.bind(this);
     this.updateCheckpoint = this.updateCheckpoint.bind(this);
-    this.createCheckpoint = this.createCheckpoint.bind(this);
     this.updateLot = this.updateLot.bind(this);
     this.createLot = this.createLot.bind(this);
   }
@@ -54,13 +50,14 @@ export default class App extends Component {
     });
   }
 
-  findProductPaths() {
-    this.getLocations(addresses[this.state.query]);
+  async findProductPaths() {
+    const response = await this.state.apiService.getLocations(addresses[this.state.query])
     this.setState({
       query: '',
       displayedPaths: [],
-      goodSearch: paths[this.state.query]
-    }); 
+      goodSearch: paths[this.state.query],
+      paths: [response.data] || []
+    });
   }
 
   updateQuery(event) {
@@ -69,6 +66,7 @@ export default class App extends Component {
     });
   }
 
+<<<<<<< HEAD
   getLocations(addresses) {
     this.state.service.get('/api/v1/get_locations_for_good_path', {
       params: {
@@ -95,6 +93,8 @@ export default class App extends Component {
       console.log(response)
     });
   }
+=======
+>>>>>>> Implement functioning apiService
 
   createLot(event) {
     axios.post("https://sourcery-api.herokuapp.com/api/v1/lots", this.state.lot)
@@ -139,7 +139,7 @@ export default class App extends Component {
           />
           <Mapp paths={this.state.displayedPaths} />
           <CreateCheckpoint
-            createCheckpoint={this.createCheckpoint}
+            createCheckpoint={this.state.apiService.createCheckpoint}
             updateCheckpoint={this.updateCheckpoint}
             checkpoint={this.state.checkpoint}
           />
