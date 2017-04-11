@@ -112,8 +112,11 @@ button, input[type="submit"] {
   align-items: center; }
   .product-search li button {
     background-color: #EFECCA;
-    margin: 10px 0; }
+    font-size: 1em;
+    margin: 10px 0;
+    transition: .3s; }
     .product-search li button:hover, .product-search li button:focus {
+      transition: .3s;
       background-color: #046380;
       color: #fff; }
 
@@ -129,19 +132,28 @@ button, input[type="submit"] {
       width: 90%;
       font-size: 1.2em; }
     .product-search input[type="submit"] {
+      visibility: hidden;
+      opacity: 0;
+      transition: .3s;
       width: 90%;
       font-size: 1em;
       background: #046380;
       color: #fff; }
       .product-search input[type="submit"]:hover, .product-search input[type="submit"]:focus {
+        transition: .3s;
         background: #002F2F;
         cursor: pointer; }
+      .product-search input[type="submit"].show {
+        visibility: visible;
+        opacity: 1; }
   .product-search > button {
     width: 90%;
     background: #046380;
     color: #fff;
-    font-size: 1em; }
+    font-size: 1em;
+    transition: .3s; }
     .product-search > button:hover, .product-search > button:focus {
+      transition: .3s;
       background-color: #002F2F; }
 
 article.map {

@@ -25,10 +25,11 @@ export default class ProductSearch extends Component {
           onChange={event => this.props.updateQuery(event)}
           onKeyPress={event => this.checkEnter(event)}
         />
-        <input type="submit" 
-          value="Get Pathways" 
-          onClick={() => this.props.findProductPaths()}
-        />
+				<input type="submit" 
+					value="Get Pathways" 
+					onClick={() => this.props.findProductPaths()}
+					className={this.props.query === '' ? '' : 'show'}
+				/>
         <ul>{searchItems}</ul>
         <button onClick={() => this.props.viewAllPaths()} 
           style={{display: this.props.paths.length !== 0 ? '' : 'none'}}

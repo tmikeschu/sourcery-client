@@ -6,9 +6,12 @@
     align-items: center;
     button {
       background-color: $cream;
+      font-size: 1em;
       margin: 10px 0;
+			transition: .3s;
       &:hover, &:focus {
-        background-color: $blue;
+				transition: .3s;
+				background-color: $blue;
         color: #fff;
       }
     }
