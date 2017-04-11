@@ -12,14 +12,14 @@ describe('<PathMapContainer />', () => {
   it('renders a single PathMap child', () => {
     const mapContainer = shallow(<PathMapContainer paths={[[1]]} />);
     const mapCenter = {
-      lat: -1.6246706849414423,
-      lng: -85.56376812500002
+      lat: 14.2499821,
+      lng: 1.6302113
     };
 
     expect(mapContainer.children().length).toEqual(1);
     expect(mapContainer.children()['node']['type']).toEqual(PathMap)
     expect(mapContainer.find(PathMap).prop('paths')).toEqual([[1]]);
-    expect(mapContainer.find(PathMap).prop('zoom')).toEqual(3);
+    expect(mapContainer.find(PathMap).prop('zoom')).toEqual(2);
     expect(mapContainer.find(PathMap).prop('center')).toEqual(mapCenter);
   });
 });

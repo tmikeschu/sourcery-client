@@ -1,16 +1,26 @@
 import React, { Component } from 'react';
-import { GoogleMapLoader, GoogleMap, Polyline } from 'react-google-maps';
+import { GoogleMap, Polyline, Marker } from 'react-google-maps';
+import { default as ScriptjsLoader } from "react-google-maps/lib/async/ScriptjsLoader";
+
 
 export default class PathMap extends Component {
   render() {
     const mapContainer = <div style={{ height: "100%", width: "100%" }} />;
 
-    const pathMarkers = this.props.paths.map((path, i) => {
-      const coordinates = path.map(checkpoint => {
-        return {
+    let markers = [];
+
+    const pathLines = this.props.paths.map((path, i) => {
+      const coordinates = path.map((checkpoint, j) => {
+        const position = {
           lat: parseFloat(checkpoint.lat),
           lng: parseFloat(checkpoint.lng)
-        }
+        };
+
+        markers.push(
+          <Marker key={j} position={position} />
+        );
+
+        return position;
       })
 
       return(
@@ -23,7 +33,16 @@ export default class PathMap extends Component {
     })
 
     return(
-      <GoogleMapLoader
+      <ScriptjsLoader
+        hostname={"maps.googleapis.com"}
+        pathname={"/maps/api/js"}
+        query={{ 
+          key: "AIzaSyBqQ33VzbShGEg8bqEqXUv56Ru-WYg-wQA", 
+          libraries: "geometry,drawing,visualization" 
+        }}
+        loadingElement={
+          <div>Loading</div>
+        }
         containerElement={ mapContainer }
         googleMapElement={
           <GoogleMap
@@ -33,7 +52,8 @@ export default class PathMap extends Component {
               streetViewControl: true,
               myTypeControl: false,
             }}>
-            { pathMarkers }
+            { pathLines }
+            { markers }
           </GoogleMap>
       } />
     );

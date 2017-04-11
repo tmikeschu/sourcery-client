@@ -6,10 +6,10 @@ export default class PathMapContainer extends Component {
   render() {
     const fullHeightAndWidth = { width: '100%', height: '100vh' };
     const mapCenter = {
-      lat: -1.6246706849414423,
-      lng: -85.56376812500002
+      lat: 14.2499821,
+      lng: 1.6302113
     };
-    const mapZoom = 3;
+    const mapZoom = 2;
 
     return (
       <div style={fullHeightAndWidth}>
