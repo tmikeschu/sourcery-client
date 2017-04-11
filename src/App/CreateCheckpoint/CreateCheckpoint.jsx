@@ -22,7 +22,7 @@ export default class CreateCheckpoint extends Component {
         <ul>{checkpointAttributes}</ul>
         <input type="submit"
           value="Create a checkpoint"
-          onClick={() => this.props.createCheckpoint()}
+          onClick={() => this.props.createCheckpoint(this.props.checkpoint)}
         />
       </section>
     );
