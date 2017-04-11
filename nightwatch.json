@@ -1,10 +1,11 @@
 {
   "src_folders" : ["e2e-tests"],
   "output_folder" : "reports",
-
+  "custom_commands_path": "./node_modules/nightwatch-commands/commands",
+  "custom_assertions_path": "./node_modules/nightwatch-commands/assertions",
   "selenium" : {
     "start_process" : true,
-    "server_path" : "./bin/selenium-server-standalone-3.3.1.jar",
+    "server_path" : "./node_modules/selenium-server-standalone-jar/jar/selenium-server-standalone-3.3.1.jar",
     "log_path" : "",
     "port" : 4444,
     "cli_args" : {
