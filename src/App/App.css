@@ -55,15 +55,17 @@ h3 {
 a {
   text-decoration: none;
   color: #000; }
-  a:hover, a:focus {
-    cursor: point;
-    font-weight: bold; }
+
+a:hover, a:focus {
+  cursor: point;
+  font-weight: bold; }
 
 button, input[type="submit"] {
   border: none;
   font-family: "Cutive Mono", sans-serif; }
-  button:hover, button:focus, input[type="submit"]:hover, input[type="submit"]:focus {
-    cursor: pointer; }
+
+button:hover, button:focus, input[type="submit"]:hover, input[type="submit"]:focus {
+  cursor: pointer; }
 
 .header {
   display: inline-flex;
@@ -73,18 +75,21 @@ button, input[type="submit"] {
   padding: 20px 0;
   padding-left: 10px;
   align-items: center; }
-  .header h1 {
-    font-weight: bold; }
-  .header a {
-    margin-right: 5%; }
+
+.header h1 {
+  font-weight: bold; }
+
+.header a {
+  margin-right: 5%; }
 
 .location {
   padding: 10px;
   background: #046380;
   color: #fff;
   width: 220px; }
-  .location li {
-    margin: 5px 0; }
+
+.location li {
+  margin: 5px 0; }
 
 .product-path {
   align-items: center;
@@ -93,68 +98,80 @@ button, input[type="submit"] {
   margin: 10px auto;
   width: 80%;
   justify-content: space-around; }
-  .product-path .start, .product-path .finish {
-    align-self: stretch;
-    color: #fff;
-    display: flex;
-    padding: 1%;
-    flex-flow: column nowrap;
-    justify-content: center; }
-  .product-path .start {
-    background-color: #4CBB17; }
-  .product-path .finish {
-    background-color: #8E2323; }
+
+.product-path .start, .product-path .finish {
+  align-self: stretch;
+  color: #fff;
+  display: flex;
+  padding: 1%;
+  flex-flow: column nowrap;
+  justify-content: center; }
+
+.product-path .start {
+  background-color: #4CBB17; }
+
+.product-path .finish {
+  background-color: #8E2323; }
 
 .product-search li {
   display: flex;
   width: 90%;
   justify-content: space-between;
   align-items: center; }
-  .product-search li button {
-    background-color: #EFECCA;
-    font-size: 1em;
-    margin: 10px 0;
-    transition: .3s; }
-    .product-search li button:hover, .product-search li button:focus {
-      transition: .3s;
-      background-color: #046380;
-      color: #fff; }
+
+.product-search li button {
+  background-color: #EFECCA;
+  font-size: 1em;
+  margin: 10px 0;
+  transition: .3s; }
+
+.product-search li button:hover, .product-search li button:focus {
+  transition: .3s;
+  background-color: #046380;
+  color: #fff; }
 
 .product-search {
   min-width: 300px;
   margin-left: 10px;
   display: flex;
   flex-flow: column nowrap; }
-  .product-search input {
-    margin: 10px 0;
-    border: none; }
-    .product-search input[type="text"] {
-      width: 90%;
-      font-size: 1.2em; }
-    .product-search input[type="submit"] {
-      visibility: hidden;
-      opacity: 0;
-      transition: .3s;
-      width: 90%;
-      font-size: 1em;
-      background: #046380;
-      color: #fff; }
-      .product-search input[type="submit"]:hover, .product-search input[type="submit"]:focus {
-        transition: .3s;
-        background: #002F2F;
-        cursor: pointer; }
-      .product-search input[type="submit"].show {
-        visibility: visible;
-        opacity: 1; }
-  .product-search > button {
-    width: 90%;
-    background: #046380;
-    color: #fff;
-    font-size: 1em;
-    transition: .3s; }
-    .product-search > button:hover, .product-search > button:focus {
-      transition: .3s;
-      background-color: #002F2F; }
+
+.product-search input {
+  margin: 10px 0;
+  border: none; }
+
+.product-search input[type="text"] {
+  width: 90%;
+  font-size: 1.2em; }
+
+.product-search input[type="submit"] {
+  visibility: hidden;
+  opacity: 0;
+  transition: .3s;
+  width: 90%;
+  font-size: 1em;
+  background: #046380;
+  color: #fff; }
+
+.product-search input[type="submit"]:hover, .product-search input[type="submit"]:focus {
+  transition: .3s;
+  background: #002F2F;
+  cursor: pointer; }
+
+.product-search input[type="submit"].show {
+  visibility: visible;
+  opacity: 1; }
+
+.product-search > button {
+  width: 90%;
+  background: #046380;
+  color: #fff;
+  font-size: 1em;
+  transition: .3s; }
+
+.product-search > button:hover, .product-search > button:focus {
+  transition: .3s;
+  background-color: #002F2F; }
 
 article.map {
   width: 100%; }
