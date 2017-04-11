@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Header from './Header/Header';
 import ProductSearch from './ProductSearch/ProductSearch';
+import { paths, productAddress, addresses } from './utils/static-data.js';
+import CreateCheckpoint from './CreateCheckpoint/CreateCheckpoint';
 import Mapp from './Mapp/Mapp';
 import axios from 'axios';
 import { paths, productAddress, addresses } from './utils/static-data.js';
@@ -24,12 +26,16 @@ export default class App extends Component {
         baseURL: process.env.NODE_ENV === 'production' 
         ? "https://sourcery-api.herokuapp.com" 
         : "http://localhost:9000" 
-      })
+      }),
+      checkpoint: {street_adress: "", longitude: "", latitude: "",
+                  creator: "", city: "", state: "", country: ""}
     };
     this.handlePathViewClick = this.handlePathViewClick.bind(this);
     this.viewAllPaths = this.viewAllPaths.bind(this);
     this.findProductPaths = this.findProductPaths.bind(this);
     this.updateQuery = this.updateQuery.bind(this);
+    this.updateCheckpoint = this.updateCheckpoint.bind(this);
+    this.createCheckpoint = this.createCheckpoint.bind(this);
   }
 
   handlePathViewClick(path) {
@@ -73,6 +79,27 @@ export default class App extends Component {
       .catch(error => console.log(error));
     }
 
+  createCheckpoint() {
+    axios.post("https://sourcery-api.herokuapp.com/api/v1/locations", this.state.checkpoint)
+    .then((response) => {
+      // success message here
+      console.log("SUCCESS")
+      console.log(response)
+    })
+    .catch((response) => {
+      console.log("Fail")
+      console.log(response)
+    });
+  }
+
+  updateCheckpoint(event, attribute) {
+    var checkpoint = this.state.checkpoint;
+    checkpoint[attribute] = event.target.value
+    this.setState({
+      checkpoint,
+    });
+  }
+
   render() {
     return (
       <div className="App">
@@ -88,6 +115,11 @@ export default class App extends Component {
             goodSearch={this.state.goodSearch}
           />
           <Mapp paths={this.state.displayedPaths} />
+          <CreateCheckpoint
+            createCheckpoint={this.createCheckpoint}
+            updateCheckpoint={this.updateCheckpoint}
+            checkpoint={this.state.checkpoint}
+          />
         </main>
       </div>
     );
