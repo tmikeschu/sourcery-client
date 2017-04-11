@@ -4,7 +4,7 @@ import '../../App.css';
 export default class ProductSearchItem extends Component {
   render() {
     return(
-      <li> 
+      <li id={this.props.id}> 
         <h4>Created by: {this.props.path[this.props.path.length - 1].creator}</h4>
         <button onClick={() => this.props.handlePathViewClick(this.props.path)}>view</button>
       </li> 

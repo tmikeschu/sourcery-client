@@ -4,7 +4,7 @@
   "private": true,
   "devDependencies": {
     "enzyme": "^2.8.0",
-    "jest-enzyme": "^3.0.0",
+    "jest-enzyme": "^2.1.2",
     "node-sass": "^4.5.1",
     "npm-run-all": "^4.0.2",
     "react-addons-test-utils": "^15.4.2",

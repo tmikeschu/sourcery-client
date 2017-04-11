@@ -1,23 +1,11 @@
 import React, { Component } from 'react';
 import Header from './Header/Header';
 import ProductSearch from './ProductSearch/ProductSearch';
-import Map from './Map/Map';
-// import axios from 'axios';
-import { paths, productAddress } from './utils/static-data.js';
+import Mapp from './Mapp/Mapp';
+import axios from 'axios';
+import { paths, productAddress, addresses } from './utils/static-data.js';
 
 import './App.css';
-//import Web3 from 'web3';
-//import { ABI } from './ABI';
-
-//const ETHERIUM_CLIENT = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-// JSON.stringify(Contract.deployed().abi) in truffle console
-// People.deployed.address
-//const peopleContractAbi = ABI;
-
-//const peopleContractAddress = "0xD79B4C6791784184e2755B2fC1659eaaB0f80456";
-//const piggyBank = ETHERIUM_CLIENT.eth.contract(peopleContractAbi).at(peopleContractAddress)
-// _.getPeople()
-
 
 export default class App extends Component {
   constructor(props) {
@@ -28,6 +16,11 @@ export default class App extends Component {
       displayedPaths: [],
       query: '',
       goodSearch: true,
+      service: axios.create({
+        baseURL: process.env.NODE_ENV === 'production' 
+        ? "https://sourcery-api.herokuapp.com" 
+        : "http://localhost:9000" 
+      })
     };
     this.handlePathViewClick = this.handlePathViewClick.bind(this);
     this.viewAllPaths = this.viewAllPaths.bind(this);
@@ -48,8 +41,8 @@ export default class App extends Component {
   }
 
   findProductPaths() {
+    this.getLocations(addresses[this.state.query]);
     this.setState({
-      paths: paths[this.state.query] || [],
       query: '',
       displayedPaths: [],
       goodSearch: paths[this.state.query]
@@ -60,6 +53,20 @@ export default class App extends Component {
     this.setState({
       query: event.target.value
     });
+  }
+
+  getLocations(addresses) {
+    this.state.service.get('/api/v1/get_locations_for_good_path', {
+      params: {
+        locations: addresses
+      }
+      })
+      .then(response => {
+        this.setState({
+          paths: [response.data] || []
+        });
+      })
+      .catch(error => console.log(error));
   }
 
   render() {
@@ -76,7 +83,7 @@ export default class App extends Component {
             updateQuery={this.updateQuery}
             goodSearch={this.state.goodSearch}
           />
-          <Map paths={this.state.displayedPaths} />
+          <Mapp paths={this.state.displayedPaths} />
         </main>
       </div>
     );

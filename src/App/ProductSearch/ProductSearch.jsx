@@ -13,6 +13,7 @@ export default class ProductSearch extends Component {
       <ProductSearchItem 
         path={path}
         key={i}
+        id={i}
         handlePathViewClick={this.props.handlePathViewClick}
       />
     )
