@@ -3,6 +3,7 @@ import Header from './Header/Header';
 import ProductSearch from './ProductSearch/ProductSearch';
 import { paths, productAddress, addresses } from './utils/static-data.js';
 import CreateCheckpoint from './CreateCheckpoint/CreateCheckpoint';
+import CreateLot from './CreateLot/CreateLot';
 import Mapp from './Mapp/Mapp';
 import axios from 'axios';
 import { paths, productAddress, addresses } from './utils/static-data.js';
@@ -28,7 +29,8 @@ export default class App extends Component {
         : "http://localhost:9000" 
       }),
       checkpoint: {street_adress: "", longitude: "", latitude: "",
-                  creator: "", city: "", state: "", country: ""}
+                  creator: "", city: "", state: "", country: ""},
+      lot: {name:""}
     };
     this.handlePathViewClick = this.handlePathViewClick.bind(this);
     this.viewAllPaths = this.viewAllPaths.bind(this);
@@ -36,6 +38,8 @@ export default class App extends Component {
     this.updateQuery = this.updateQuery.bind(this);
     this.updateCheckpoint = this.updateCheckpoint.bind(this);
     this.createCheckpoint = this.createCheckpoint.bind(this);
+    this.updateLot = this.updateLot.bind(this);
+    this.createLot = this.createLot.bind(this);
   }
 
   handlePathViewClick(path) {
@@ -92,11 +96,30 @@ export default class App extends Component {
     });
   }
 
+  createLot(event) {
+    axios.post("https://sourcery-api.herokuapp.com/api/v1/lots", this.state.lot)
+    .then((response) => {
+      // success message here
+      console.log("SUCCESS")
+      console.log(response)
+    })
+    .catch((response) => {
+      console.log("Fail")
+      console.log(response)
+    });
+  }
+
   updateCheckpoint(event, attribute) {
     var checkpoint = this.state.checkpoint;
     checkpoint[attribute] = event.target.value
     this.setState({
       checkpoint,
+    });
+  }
+
+  updateLot(vent) {
+    this.setState({
+      lot: event.target.value,
     });
   }
 
@@ -119,6 +142,11 @@ export default class App extends Component {
             createCheckpoint={this.createCheckpoint}
             updateCheckpoint={this.updateCheckpoint}
             checkpoint={this.state.checkpoint}
+          />
+          <CreateLot
+            createLot={this.createLot}
+            updateLot={this.updateLot}
+            lot={this.lot}
           />
         </main>
       </div>
