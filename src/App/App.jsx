@@ -4,8 +4,12 @@ import ProductSearch from './ProductSearch/ProductSearch';
 import Mapp from './Mapp/Mapp';
 import axios from 'axios';
 import { paths, productAddress, addresses } from './utils/static-data.js';
-
+import { pathsControllerContractAbi, pathsControllerAddress } from './ethereum/EthereumData';
 import './App.css';
+import Web3 from 'web3';
+
+const ETHEREUM_CLIENT = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+ETHEREUM_CLIENT.eth.contract(pathsControllerContractAbi).at(pathsControllerAddress);
 
 export default class App extends Component {
   constructor(props) {
@@ -67,7 +71,7 @@ export default class App extends Component {
         });
       })
       .catch(error => console.log(error));
-  }
+    }
 
   render() {
     return (
