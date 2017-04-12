@@ -7,11 +7,12 @@ export default class createLot extends Component {
       <section className="create-lot">
         <input type="text"
           value={this.props.lot}
-          placeholder="Enter your lots name"
+          placeholder="Enter your lot's name"
+          onChange={event => this.props.updateLot(event)}
         />
         <input type="submit"
           value="Create a Lot"
-          onClick={() => this.props.createLott()}
+          onClick={() => this.props.createLot()}
         />
       </section>
     );
