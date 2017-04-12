@@ -1,10 +1,10 @@
 import axios from 'axios';
-import apiService from './apiService';
-import { productAddress, addresses } from './utils/static-data.js';
+import APIService from './APIService';
+import { productAddress, addresses } from '../utils/static-data.js';
 
-describe('apiService', () => {
+describe('APIService', () => {
   let service;
-  beforeEach(() => service = new apiService());
+  beforeEach(() => service = new APIService());
 
   describe('constructor', () => {
     it('constructs with a base url', () => {

@@ -5,7 +5,7 @@ import { paths, productAddress, addresses } from './utils/static-data.js';
 import CreateCheckpoint from './CreateCheckpoint/CreateCheckpoint';
 import CreateLot from './CreateLot/CreateLot';
 import Mapp from './Mapp/Mapp';
-import apiService from './apiService';
+import APIService from './APIService/APIService';
 import axios from 'axios';
 import { paths, productAddress, addresses } from './utils/static-data.js';
 import { pathsControllerContractAbi, pathsControllerAddress } from './ethereum/EthereumData';
@@ -24,15 +24,16 @@ export default class App extends Component {
       displayedPaths: [],
       query: '',
       goodSearch: true,
-      checkpoint: {street_adress: "", longitude: "", latitude: "",
-                  creator: "", city: "", state: "", country: ""},
+      checkpoint: {creator: "", street_adress: "", city: "", state: "", country: "",
+                    lat: "", lng: "", zipcode: ""},
       lot: {name:""},
-      apiService: new apiService()
+      APIService: new APIService()
     };
     this.handlePathViewClick = this.handlePathViewClick.bind(this);
     this.viewAllPaths = this.viewAllPaths.bind(this);
     this.findProductPaths = this.findProductPaths.bind(this);
     this.updateQuery = this.updateQuery.bind(this);
+    this.createCheckpoint = this.createCheckpoint.bind(this);
     this.updateCheckpoint = this.updateCheckpoint.bind(this);
     this.updateLot = this.updateLot.bind(this);
     this.createLot = this.createLot.bind(this);
@@ -51,7 +52,7 @@ export default class App extends Component {
   }
 
   async findProductPaths() {
-    const response = await this.state.apiService.getLocations(addresses[this.state.query])
+    const response = await this.state.APIService.getLocations(addresses[this.state.query])
     this.setState({
       query: '',
       displayedPaths: [],
@@ -60,49 +61,17 @@ export default class App extends Component {
     });
   }
 
+  async createLot(lot) {
+    await this.state.APIService.createLot(this.state.lot)
+  }
+
+  async createCheckpoint() {
+    await this.state.APIService.createCheckpoint(this.state.checkpoint)
+  }
+
   updateQuery(event) {
     this.setState({
       query: event.target.value
-    });
-  }
-
-  getLocations(addresses) {
-    this.state.service.get('/api/v1/get_locations_for_good_path', {
-      params: {
-        locations: addresses
-      }
-      })
-      .then(response => {
-        this.setState({
-          paths: [response.data] || []
-        });
-      })
-      .catch(error => console.log(error));
-    }
-
-  createCheckpoint() {
-    axios.post("https://sourcery-api.herokuapp.com/api/v1/locations", this.state.checkpoint)
-    .then((response) => {
-      // success message here
-      console.log("SUCCESS")
-      console.log(response)
-    })
-    .catch((response) => {
-      console.log("Fail")
-      console.log(response)
-    });
-  }
-
-  createLot(event) {
-    axios.post("https://sourcery-api.herokuapp.com/api/v1/lots", this.state.lot)
-    .then((response) => {
-      // success message here
-      console.log("SUCCESS")
-      console.log(response)
-    })
-    .catch((response) => {
-      console.log("Fail")
-      console.log(response)
     });
   }
 
@@ -136,7 +105,7 @@ export default class App extends Component {
           />
           <Mapp paths={this.state.displayedPaths} />
           <CreateCheckpoint
-            createCheckpoint={this.state.apiService.createCheckpoint}
+            createCheckpoint={this.createCheckpoint}
             updateCheckpoint={this.updateCheckpoint}
             checkpoint={this.state.checkpoint}
           />

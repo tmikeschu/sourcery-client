@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default class apiService {
+export default class APIService {
   constructor() {
     this.service = axios.create({
       baseURL: process.env.NODE_ENV === 'production' 
@@ -20,16 +20,26 @@ export default class apiService {
   }
   
   createCheckpoint(checkpoint) {
-    debugger;
-    this.service.post("/api/v1/locations", this.state.checkpoint)
+    return this.service.post("/api/v1/checkpoints", checkpoint)
     .then((response) => {
-      // success message here
       console.log("SUCCESS")
-      console.log(response)
+      return response
     })
-    .catch((response) => {
+    .catch((error) => {
       console.log("Fail")
-      console.log(response)
+      return error
+    });
+  }
+
+  createLot(lot) {
+    return this.service.post("/api/v1/lots", lot)
+    .then((response) => {
+      console.log("SUCCESS")
+      return response
+    })
+    .catch((error) => {
+      console.log("Fail")
+      return error
     });
   }
 }
