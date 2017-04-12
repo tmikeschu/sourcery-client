@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "axios-vcr": "^1.0.1",
     "enzyme": "^2.8.0",
     "jest-enzyme": "^2.1.2",
     "nightwatch": "^0.9.14",

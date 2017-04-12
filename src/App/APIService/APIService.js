@@ -10,9 +10,9 @@ export default class APIService {
   }
 
   getLocations(addresses) {
-    return this.service.get('/api/v1/get_locations_for_good_path', {
+    return this.service.get('/api/v1/get_checkpoints_for_good_path', {
       params: {
-        locations: addresses
+        checkpoints: addresses
       }
       })
       .then(response => response)
