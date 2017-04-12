@@ -1,7 +1,6 @@
 # Sourcery (client)
 [![Build Status](https://travis-ci.org/tmikeschu/sourcery-client.png)](https://travis-ci.org/tmikeschu/sourcery-client)
 
-
 ### About This
 
 Tracking the supply chain of agricultural product is a common challenge. How do
@@ -37,19 +36,33 @@ cd sourcery-client/
 
 // install dependencies
 npm install
+```
 
-// run all the tests
+Run all the tests
+```javascript
 npm run testAll
 // End-to-end tests will start upon 'q'uitting the Jest runner.
+```
 
-// run the Enzyme/Jest tests
-npm run test
+Run the Enzyme/Jest tests
+```javascript
+npm jest
 // then 'a' then 'q', 
+```
 
-// run the end-to-end tests in Nightwatch.js independently
+Run the end-to-end tests in Nightwatch.js independently
+```javascript
 npm run e2e
+```
 
 
-// start the server
+Start the server
+```javascript
 npm start
+```
+
+To check for build status and compatibility with Travis CI, run:
+```
+CI=true npm test
+CI=true npm run build
 ```
