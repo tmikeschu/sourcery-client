@@ -25,11 +25,10 @@ module.exports = { // adapted from: https://git.io/vodU0
     .waitForElementVisible('body', 1000)
     .setValue('.product-search input[type=text]', '0x7da07904ffproduct9afdecb7b1eb0d767b37803')
     .click('.product-search input[type=submit]')
-    .assert.containsText('.product-search li:nth-of-type(1) h4', 'Created by: Nick')
+    .waitForElementVisible('.product-search li:nth-of-type(1)', 1000)
+    .assert.containsText('.product-search li:nth-of-type(1) h4', 'Created by: Camilla')
     .assert.containsText('.product-search li:nth-of-type(1) button', 'view')
     .assert.containsText('.product-search > button', 'View All')
-    .assert.elementPresent('.product-search li:nth-of-type(2)')
-    .assert.elementPresent('.product-search li:nth-of-type(3)')
     .end();
   }
 };
