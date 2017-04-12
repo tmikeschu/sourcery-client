@@ -15,7 +15,7 @@ describe('APIService', () => {
 
   describe('getLocations', () => {
     it('returns location objects', async () => {
-      const response = await service.getLocations(addresses[productAddress]);
+      const response = await service.getLocations(addresses[productAddress])
       expect(response.data[0]).toBeTruthy();
 
       const firstLocation = response.data[0];
