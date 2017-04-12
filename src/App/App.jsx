@@ -66,7 +66,6 @@ export default class App extends Component {
     });
   }
 
-<<<<<<< HEAD
   getLocations(addresses) {
     this.state.service.get('/api/v1/get_locations_for_good_path', {
       params: {
@@ -93,8 +92,6 @@ export default class App extends Component {
       console.log(response)
     });
   }
-=======
->>>>>>> Implement functioning apiService
 
   createLot(event) {
     axios.post("https://sourcery-api.herokuapp.com/api/v1/lots", this.state.lot)
