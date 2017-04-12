@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import Header from './Header/Header';
 import ProductSearch from './ProductSearch/ProductSearch';
-import { paths, productAddress, addresses } from './utils/static-data.js';
 import CreateCheckpoint from './CreateCheckpoint/CreateCheckpoint';
 import CreateLot from './CreateLot/CreateLot';
 import Mapp from './Mapp/Mapp';
-import APIService from './APIService/APIService';
-import axios from 'axios';
+import { service } from './APIService/APIService';
 import { paths, productAddress, addresses } from './utils/static-data.js';
 import { pathsControllerContractAbi, pathsControllerAddress } from './ethereum/EthereumData';
 import './App.css';
 import Web3 from 'web3';
 
-const ETHEREUM_CLIENT = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-ETHEREUM_CLIENT.eth.contract(pathsControllerContractAbi).at(pathsControllerAddress);
+const ETHEREUM_CLIENT = new Web3(
+  new Web3.providers.HttpProvider("http://localhost:8545")
+);
 
 export default class App extends Component {
   constructor(props) {
@@ -24,10 +23,17 @@ export default class App extends Component {
       displayedPaths: [],
       query: '',
       goodSearch: true,
-      checkpoint: {creator: "", street_adress: "", city: "", state: "", country: "",
-                    lat: "", lng: "", zipcode: ""},
-      lot: {name:""},
-      APIService: new APIService()
+      checkpoint: {
+        creator: "",
+        street_adress: "",
+        city: "",
+        state: "",
+        country: "",
+        lat: "",
+        lng: "",
+        zipcode: ""
+      },
+      lot: { name: "" },
     };
     this.handlePathViewClick = this.handlePathViewClick.bind(this);
     this.viewAllPaths = this.viewAllPaths.bind(this);
@@ -37,6 +43,21 @@ export default class App extends Component {
     this.updateCheckpoint = this.updateCheckpoint.bind(this);
     this.updateLot = this.updateLot.bind(this);
     this.createLot = this.createLot.bind(this);
+  }
+
+  APIService() {
+    return service;
+  }
+
+  ethereumClient() {
+    return ETHEREUM_CLIENT;
+  }
+
+  pathsController() {
+    return this.ethereumClient()
+      .eth
+      .contract(pathsControllerContractAbi)
+      .at(pathsControllerAddress);
   }
 
   handlePathViewClick(path) {
@@ -52,7 +73,7 @@ export default class App extends Component {
   }
 
   async findProductPaths() {
-    const response = await this.state.APIService.getLocations(addresses[this.state.query])
+    const response = await this.APIService().getCheckpoints(addresses[this.state.query])
     this.setState({
       query: '',
       displayedPaths: [],
@@ -62,11 +83,11 @@ export default class App extends Component {
   }
 
   async createLot(lot) {
-    await this.state.APIService.createLot(this.state.lot)
+    await this.APIService().createLot(this.state.lot);
   }
 
   async createCheckpoint() {
-    await this.state.APIService.createCheckpoint(this.state.checkpoint)
+    await this.APIService().createCheckpoint(this.state.checkpoint);
   }
 
   updateQuery(event) {
@@ -76,16 +97,18 @@ export default class App extends Component {
   }
 
   updateCheckpoint(event, attribute) {
-    var checkpoint = this.state.checkpoint;
-    checkpoint[attribute] = event.target.value
+    const checkpoint = this.state.checkpoint;
+    checkpoint[attribute] = event.target.value;
     this.setState({
-      checkpoint,
+      checkpoint
     });
   }
 
-  updateLot(vent) {
+  updateLot(event) {
+    const lot = this.state.lot;
+    lot["name"] = event.target.value;
     this.setState({
-      lot: event.target.value,
+      lot
     });
   }
 
