@@ -19,7 +19,7 @@ export default class ProductSearch extends Component {
     )
     return(
       <section className="product-search"> 
-        <h3>Product Search</h3>
+        <h3 tabIndex="0">Product Search</h3>
         <input type="text" 
           value={this.props.query}
           placeholder="enter product id" 

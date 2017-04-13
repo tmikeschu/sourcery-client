@@ -12,8 +12,7 @@ describe('<Header />', () => {
     const header = shallow(<Header />); 
     expect(header.contains(
       <header className="header">
-        <h1>Sourcery</h1>
-        <a href="#">Sign in to log a checkpoint</a>
+        <h1 tabIndex="0">Sourcery</h1>
       </header>
     )).toBeTruthy(); 
   });
