@@ -19,6 +19,8 @@ paths.
 Future iteration plans include the ability to add goods/products and register
 change of possession (e.g., between producer and transport).
 
+**If you're interested in the Sourcery production site, please note that interaction will be limited. All relevant smart contracts are deployed to a live blockchain, but each submission requires a personal confirmation from the account that deployed it. For now, the easiest way to interact with our whole ecosystem is to follow the directions on [our Solidity repository](https://github.com/ethanbennett/sourcery) for setting up an instance of TestRPC and running the client locally.**
+
 *This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).*
 
 ### About Us
