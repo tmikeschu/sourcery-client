@@ -28,6 +28,12 @@ export class APIService {
     .then(response => response)
     .catch(error => console.error(error));
   }
+
+  getProducts() {
+    return this.service.get('/api/v1/products')
+      .then(response => response)
+      .catch(error => console.error(error));
+  }
 }
 
 export const service = new APIService();

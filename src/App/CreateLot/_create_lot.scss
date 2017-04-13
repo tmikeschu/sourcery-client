@@ -1,0 +1,26 @@
+.create-lot{
+  h3 {
+    font-size: 1.7em;
+  }
+  select {
+    width: 90%;
+    font-family: $font;
+    font-size: 1.2em;
+  }
+  input {
+    border: none;
+    &[type="submit"] {
+      margin: 5px 0;
+      transition: .3s;
+      width: 90%;
+      font-size: 1em;
+      background: $blue;
+      color: #fff;
+      &:hover, &:focus {
+        transition: .3s;
+        background: $teal; 
+        cursor: pointer;
+      }
+    }
+  }
+}

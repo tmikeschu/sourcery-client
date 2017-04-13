@@ -8,6 +8,8 @@
 @import './ProductPath/product_path.scss';
 @import './ProductSearch/product_search.scss';
 @import './Mapp/map.scss';
+@import './CreateCheckpoint/create_checkpoint.scss';
+@import './CreateLot/create_lot.scss';
 
 html, body {
   height: 100%;
@@ -18,4 +20,11 @@ main {
   height: 100%;
   display: flex;
   justify-content: space-between;
+  .create-forms{
+    width: 300px;
+    min-width: 300px;
+    display: flex;
+    flex-flow: column nowrap;
+    margin-left: 10px;
+  }
 }

@@ -2,8 +2,8 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-@import url("https://fonts.googleapis.com/css?family=Cutive+Mono");
-@import url("https://fonts.googleapis.com/css?family=Cutive+Mono");
+@import url("https://fonts.googleapis.com/css?family=Cutive+Mono|Kaushan+Script");
+@import url("https://fonts.googleapis.com/css?family=Cutive+Mono|Kaushan+Script");
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
   padding: 0;
@@ -74,7 +74,8 @@ button, input[type="submit"] {
   padding-left: 10px;
   align-items: center; }
   .header h1 {
-    font-weight: bold; }
+    font-family: "Kaushan Script", "Garamond";
+    letter-spacing: 15px; }
   .header a {
     margin-right: 5%; }
 
@@ -121,6 +122,7 @@ button, input[type="submit"] {
       color: #fff; }
 
 .product-search {
+  width: 300px;
   min-width: 300px;
   margin-left: 10px;
   display: flex;
@@ -159,6 +161,53 @@ button, input[type="submit"] {
 article.map {
   width: 100%; }
 
+.create-checkpoint h3 {
+  font-size: 1.7em;
+  margin-bottom: 5px; }
+
+.create-checkpoint ul input {
+  margin: 2px 0;
+  width: 90%; }
+  .create-checkpoint ul input[type="text"] {
+    width: 90%;
+    font-size: 1.2em; }
+
+.create-checkpoint input {
+  border: none; }
+  .create-checkpoint input[type="submit"] {
+    margin: 5px 0;
+    transition: .3s;
+    width: 90%;
+    font-size: 1em;
+    background: #046380;
+    color: #fff; }
+    .create-checkpoint input[type="submit"]:hover, .create-checkpoint input[type="submit"]:focus {
+      transition: .3s;
+      background: #002F2F;
+      cursor: pointer; }
+
+.create-lot h3 {
+  font-size: 1.7em; }
+
+.create-lot select {
+  width: 90%;
+  font-family: "Cutive Mono", sans-serif;
+  font-size: 1.2em; }
+
+.create-lot input {
+  border: none; }
+  .create-lot input[type="submit"] {
+    margin: 5px 0;
+    transition: .3s;
+    width: 90%;
+    font-size: 1em;
+    background: #046380;
+    color: #fff; }
+    .create-lot input[type="submit"]:hover, .create-lot input[type="submit"]:focus {
+      transition: .3s;
+      background: #002F2F;
+      cursor: pointer; }
+
 html, body {
   height: 100%; }
 
@@ -167,3 +216,9 @@ main {
   height: 100%;
   display: flex;
   justify-content: space-between; }
+  main .create-forms {
+    width: 300px;
+    min-width: 300px;
+    display: flex;
+    flex-flow: column nowrap;
+    margin-left: 10px; }

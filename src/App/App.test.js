@@ -36,12 +36,12 @@ describe('<App />', () => {
     expect(app.find(ProductSearch).length).toEqual(1);
   });
 
-  it('calls findProductPaths when the submit is clicked', async () => {
+  it('calls findProductPaths when the submit is clicked', () => {
     const restore = App.prototype.findProductPaths;
     const mock = App.prototype.findProductPaths = jest.fn();
     const app = mount(<App />);
     app.find('.product-search input[type="submit"]').simulate('click');
-    await expect(mock).toHaveBeenCalled();
+    expect(mock).toHaveBeenCalled();
     App.prototype.findProductPaths = restore;
   });
 
@@ -69,7 +69,7 @@ describe('<App />', () => {
     const restore = App.prototype.updateLot;
     const mock = App.prototype.updateLot = jest.fn();
     const app = mount(<App />);
-    app.find('.create-lot input[type="text"]').simulate('change');
+    app.find('.create-lot select').simulate('change');
     expect(mock).toHaveBeenCalled();
     App.prototype.updateLot = restore;
   });
@@ -99,7 +99,7 @@ describe('<App />', () => {
     const mock = App.prototype.createLot = jest.fn();
     const app = mount(<App />);
     app.instance().setState({ paths: paths[productAddress] })
-    app.find('.create-lot input[type="submit"]').simulate('click');
+    app.find('.create-lot form').simulate('submit');
     expect(mock).toBeCalled();
     App.prototype.createLot = restore;
   });
@@ -109,7 +109,7 @@ describe('<App />', () => {
     const mock = App.prototype.createCheckpoint = jest.fn();
     const app = mount(<App />);
     app.instance().setState({ paths: paths[productAddress] })
-    app.find('.create-checkpoint input[type="submit"]').simulate('click');
+    app.find('.create-checkpoint form').simulate('submit');
     expect(mock).toBeCalled();
     App.prototype.createCheckpoint = restore;
   });
@@ -124,5 +124,13 @@ describe('<App />', () => {
 
   it('has a pathsController', () => {
     expect(App.prototype.pathsController).toBeTruthy();
+  });
+
+  it('calls getProducts on mount', () => {
+    const restore = App.prototype.APIService().getProducts;
+    const mock = App.prototype.APIService().getProducts = jest.fn();
+    const app = mount(<App />);
+    expect(mock).toBeCalled();
+    App.prototype.APIService().getProducts = restore;
   });
 });

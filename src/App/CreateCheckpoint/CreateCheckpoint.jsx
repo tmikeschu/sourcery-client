@@ -6,21 +6,20 @@ export default class CreateCheckpoint extends Component {
     const  keys = Object.keys(this.props.checkpoint)
     const checkpointAttributes = keys.map((attribute, i) =>
       <input type="text"
+        required
         key={i}
         value={this.props.checkpoint[attribute]}
-        placeholder={attribute}
+        placeholder={attribute.replace('_', ' ')}
         onChange={event => this.props.updateCheckpoint(event, attribute)}
       />
     )
     return(
       <section className="create-checkpoint">
-        <h3>Create a Checkpoint</h3>
-        <ul>{checkpointAttributes}</ul>
-        <input 
-          type="submit"
-          value="Create a checkpoint"
-          onClick={() => this.props.createCheckpoint(this.props.checkpoint)}
-        />
+        <h3 tabIndex="0">Create Checkpoint</h3>
+        <form onSubmit={(event) => this.props.createCheckpoint(event) }>
+          <ul>{checkpointAttributes}</ul>
+          <input type="submit" value="Submit" />
+        </form>
       </section>
     );
   }

@@ -25,7 +25,7 @@ export default class App extends Component {
       goodSearch: true,
       checkpoint: {
         creator: "",
-        street_adress: "",
+        street_address: "",
         city: "",
         state: "",
         country: "",
@@ -33,7 +33,8 @@ export default class App extends Component {
         lng: "",
         zipcode: ""
       },
-      lot: { name: "" },
+      lot: { product_id: ""},
+      products: [],
     };
     this.handlePathViewClick = this.handlePathViewClick.bind(this);
     this.viewAllPaths = this.viewAllPaths.bind(this);
@@ -43,6 +44,14 @@ export default class App extends Component {
     this.updateCheckpoint = this.updateCheckpoint.bind(this);
     this.updateLot = this.updateLot.bind(this);
     this.createLot = this.createLot.bind(this);
+  }
+
+  async componentDidMount() {
+    const response = await this.APIService().getProducts();
+    const products = await response && response.data
+    this.setState({
+      products: products || []
+    });
   }
 
   APIService() {
@@ -78,15 +87,18 @@ export default class App extends Component {
       query: '',
       displayedPaths: [],
       goodSearch: paths[this.state.query],
-      paths: [response.data] || []
+      paths: response ? [response.data] : []
     });
   }
 
-  async createLot(lot) {
+  async createLot(event) {
+    event.preventDefault();
+    debugger;
     await this.APIService().createLot(this.state.lot);
   }
 
-  async createCheckpoint() {
+  async createCheckpoint(event) {
+    event.preventDefault();
     await this.APIService().createCheckpoint(this.state.checkpoint);
   }
 
@@ -104,9 +116,9 @@ export default class App extends Component {
     });
   }
 
-  updateLot(event) {
+  updateLot(event, attribute) {
     const lot = this.state.lot;
-    lot["name"] = event.target.value;
+    lot[attribute] = event.target.value;
     this.setState({
       lot
     });
@@ -127,16 +139,19 @@ export default class App extends Component {
             goodSearch={this.state.goodSearch}
           />
           <Mapp paths={this.state.displayedPaths} />
-          <CreateCheckpoint
-            createCheckpoint={this.createCheckpoint}
-            updateCheckpoint={this.updateCheckpoint}
-            checkpoint={this.state.checkpoint}
-          />
-          <CreateLot
-            createLot={this.createLot}
-            updateLot={this.updateLot}
-            lot={this.lot}
-          />
+          <section className="create-forms" >
+            <CreateCheckpoint
+              createCheckpoint={this.createCheckpoint}
+              updateCheckpoint={this.updateCheckpoint}
+              checkpoint={this.state.checkpoint}
+            />
+            <CreateLot
+              createLot={this.createLot}
+              updateLot={this.updateLot}
+              products={this.state.products}
+              lot={this.state.lot}
+            />
+          </section>
         </main>
       </div>
     );

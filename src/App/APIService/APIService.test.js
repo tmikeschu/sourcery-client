@@ -79,4 +79,17 @@ describe('APIService', () => {
       }));
     });
   });
+
+  describe('getProducts', () => {
+    it('returns a collection of products', async () => {
+      const response = await service.getProducts();
+      expect(response.data).toBeTruthy();
+
+      const products = response.data;
+      expect(products[0]).toEqual(expect.objectContaining({
+        id: expect.any(Number),
+        name: expect.any(String),
+      }));
+    });
+  });
 });
