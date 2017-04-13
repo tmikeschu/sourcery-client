@@ -36,6 +36,8 @@ export default class App extends Component {
       },
       lot: { product_id: ""},
       products: [],
+      newLot: {id: 0},
+      newCheckpoint: {id: 0},
     };
     this.handlePathViewClick = this.handlePathViewClick.bind(this);
     this.viewAllPaths = this.viewAllPaths.bind(this);
@@ -101,8 +103,10 @@ export default class App extends Component {
 
   async createLot(event) {
     event.preventDefault();
-    debugger;
-    await this.APIService().createLot(this.state.lot);
+    const lot = await this.APIService().createLot(this.state.lot);
+    this.setState({
+      newLot: lot.data
+    });
   }
 
   async createCheckpoint(event) {
@@ -110,6 +114,9 @@ export default class App extends Component {
     const lotId = this.state.checkpoint.lotId
     const response = await this.APIService().createCheckpoint(this.state.checkpoint)
     this.pathsController().createOrUpdatePath(parseInt(lotId, 10), response.data.ethereum_address, {from: '0x7f02d6ddd8eb6eff72c8815c5f7e515ca1d14308', gas: 1000000})
+    this.setState({
+      newCheckpoint: response.data
+    })
   }
 
   updateQuery(event) {
@@ -154,12 +161,14 @@ export default class App extends Component {
               createCheckpoint={this.createCheckpoint}
               updateCheckpoint={this.updateCheckpoint}
               checkpoint={this.state.checkpoint}
+              newCheckpoint={this.state.newCheckpoint}
             />
             <CreateLot
               createLot={this.createLot}
               updateLot={this.updateLot}
               products={this.state.products}
               lot={this.state.lot}
+              newLot={this.state.newLot}
             />
           </section>
         </main>

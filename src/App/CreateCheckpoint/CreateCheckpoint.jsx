@@ -20,6 +20,9 @@ export default class CreateCheckpoint extends Component {
           <ul>{checkpointAttributes}</ul>
           <input type="submit" value="Submit" />
         </form>
+        <p style={{display: this.props.newCheckpoint.id !== 0 ? '' : 'none'}}>
+          Checkpoint successfully created!
+        </p>
       </section>
     );
   }
