@@ -19,10 +19,10 @@ export default class ProductSearch extends Component {
     )
     return(
       <section className="product-search"> 
-        <h3 tabIndex="0">Product Search</h3>
+        <h3 tabIndex="0">Lot Search</h3>
         <input type="text" 
           value={this.props.query}
-          placeholder="enter product id" 
+          placeholder="enter lot id" 
           onChange={event => this.props.updateQuery(event)}
           onKeyPress={event => this.checkEnter(event)}
         />

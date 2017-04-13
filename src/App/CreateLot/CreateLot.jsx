@@ -22,6 +22,9 @@ export default class CreateLot extends Component {
           </select>
           <input type="submit" value="Submit" />
         </form>
+        <p style={{display: this.props.newLot.id !== 0 ? '' : 'none'}}>
+          Lot successfully created! Lot ID: {this.props.newLot.id}
+        </p>
       </section>
     );
   }

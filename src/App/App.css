@@ -186,6 +186,13 @@ article.map {
       background: #002F2F;
       cursor: pointer; }
 
+.create-checkpoint p {
+  border: 1px solid green;
+  width: 86%;
+  padding: 5px;
+  background-color: lightgreen;
+  margin-bottom: 20px; }
+
 .create-lot h3 {
   font-size: 1.7em; }
 
@@ -207,6 +214,12 @@ article.map {
       transition: .3s;
       background: #002F2F;
       cursor: pointer; }
+
+.create-lot p {
+  border: 1px solid green;
+  width: 86%;
+  padding: 5px;
+  background-color: lightgreen; }
 
 html, body {
   height: 100%; }
