@@ -28,7 +28,7 @@ export default class ProductSearch extends Component {
         />
 				<input type="submit" 
 					value="Get Pathways" 
-					onClick={() => this.props.findProductPaths()}
+					onClick={() => this.props.getPathFrom()}
 					className={this.props.query === '' ? '' : 'show'}
 				/>
         <ul>{searchItems}</ul>

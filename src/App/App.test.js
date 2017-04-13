@@ -36,13 +36,13 @@ describe('<App />', () => {
     expect(app.find(ProductSearch).length).toEqual(1);
   });
 
-  it('calls findProductPaths when the submit is clicked', () => {
-    const restore = App.prototype.findProductPaths;
-    const mock = App.prototype.findProductPaths = jest.fn();
+  it('calls getPathFrom when the submit is clicked', () => {
+    const restore = App.prototype.getPathFrom;
+    const mock = App.prototype.getPathFrom = jest.fn();
     const app = mount(<App />);
     app.find('.product-search input[type="submit"]').simulate('click');
     expect(mock).toHaveBeenCalled();
-    App.prototype.findProductPaths = restore;
+    App.prototype.getPathFrom = restore;
   });
 
   it('calls updateQuery when an input change occurs', () => {

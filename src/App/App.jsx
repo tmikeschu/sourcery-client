@@ -110,7 +110,6 @@ export default class App extends Component {
     const lotId = this.state.checkpoint.lotId
     const response = await this.APIService().createCheckpoint(this.state.checkpoint)
     this.pathsController().createOrUpdatePath(parseInt(lotId, 10), response.data.ethereum_address, {from: '0x7f02d6ddd8eb6eff72c8815c5f7e515ca1d14308', gas: 1000000})
-    console.log("YES!")
   }
 
   updateQuery(event) {
@@ -144,7 +143,7 @@ export default class App extends Component {
             paths={this.state.paths} 
             handlePathViewClick={this.handlePathViewClick}
             viewAllPaths={this.viewAllPaths}
-            findProductPaths={this.getPathFrom}
+            getPathFrom={this.getPathFrom}
             query={this.state.query}
             updateQuery={this.updateQuery}
             goodSearch={this.state.goodSearch}
