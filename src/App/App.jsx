@@ -5,7 +5,7 @@ import CreateCheckpoint from './CreateCheckpoint/CreateCheckpoint';
 import CreateLot from './CreateLot/CreateLot';
 import Mapp from './Mapp/Mapp';
 import { service } from './APIService/APIService';
-import { paths, productAddress, addresses } from './utils/static-data.js';
+import { paths, productAddress } from './utils/static-data.js';
 import { pathsControllerContractAbi, pathsControllerAddress } from './ethereum/EthereumData';
 import './App.css';
 import Web3 from 'web3';
@@ -31,7 +31,8 @@ export default class App extends Component {
         country: "",
         lat: "",
         lng: "",
-        zipcode: ""
+        zipcode: "",
+        lotId: ""
       },
       lot: { product_id: ""},
       products: [],
@@ -44,6 +45,7 @@ export default class App extends Component {
     this.updateCheckpoint = this.updateCheckpoint.bind(this);
     this.updateLot = this.updateLot.bind(this);
     this.createLot = this.createLot.bind(this);
+    this.getPathFrom = this.getPathFrom.bind(this);
   }
 
   async componentDidMount() {
@@ -81,14 +83,20 @@ export default class App extends Component {
     });
   }
 
-  async findProductPaths() {
-    const response = await this.APIService().getCheckpoints(addresses[this.state.query])
+  async findProductPaths(checkpointAddresses) {
+    const response = await this.APIService().getCheckpoints(checkpointAddresses)
     this.setState({
       query: '',
       displayedPaths: [],
       goodSearch: paths[this.state.query],
-      paths: response ? [response.data] : []
+      paths: [response.data] || []
     });
+  }
+
+  getPathFrom() {
+    const lotId = parseInt(this.state.query, 10)
+    const checkpoints =  this.pathsController().getPath(lotId)
+    this.findProductPaths(checkpoints)
   }
 
   async createLot(event) {
@@ -99,7 +107,10 @@ export default class App extends Component {
 
   async createCheckpoint(event) {
     event.preventDefault();
-    await this.APIService().createCheckpoint(this.state.checkpoint);
+    const lotId = this.state.checkpoint.lotId
+    const response = await this.APIService().createCheckpoint(this.state.checkpoint)
+    this.pathsController().createOrUpdatePath(parseInt(lotId, 10), response.data.ethereum_address, {from: '0x7f02d6ddd8eb6eff72c8815c5f7e515ca1d14308', gas: 1000000})
+    console.log("YES!")
   }
 
   updateQuery(event) {
@@ -133,7 +144,7 @@ export default class App extends Component {
             paths={this.state.paths} 
             handlePathViewClick={this.handlePathViewClick}
             viewAllPaths={this.viewAllPaths}
-            findProductPaths={this.findProductPaths}
+            findProductPaths={this.getPathFrom}
             query={this.state.query}
             updateQuery={this.updateQuery}
             goodSearch={this.state.goodSearch}
@@ -157,4 +168,3 @@ export default class App extends Component {
     );
   }
 }
-
