@@ -5,7 +5,7 @@ import '../App.css';
 export default class ProductSearch extends Component {
   checkEnter(event) {
     if (event.key !== 'Enter') { return; }
-    this.props.findProductPaths();
+    this.props.getPathFrom();
   }
 
   render() {
