@@ -91,7 +91,7 @@ export default class App extends Component {
       query: '',
       displayedPaths: [],
       goodSearch: paths[this.state.query],
-      paths: [response.data] || []
+      paths: (response && [response.data]) || []
     });
   }
 
