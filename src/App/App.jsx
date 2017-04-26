@@ -87,6 +87,7 @@ export default class App extends Component {
 
   async findProductPaths(checkpointAddresses) {
     const response = await this.APIService().getCheckpoints(checkpointAddresses)
+    debugger;
     this.setState({
       query: '',
       displayedPaths: [],
@@ -113,7 +114,7 @@ export default class App extends Component {
     event.preventDefault();
     const lotId = this.state.checkpoint.lotId
     const response = await this.APIService().createCheckpoint(this.state.checkpoint)
-    this.pathsController().createOrUpdatePath(parseInt(lotId, 10), response.data.ethereum_address, {from: '0x7f02d6ddd8eb6eff72c8815c5f7e515ca1d14308', gas: 1000000})
+    this.pathsController().createOrUpdatePath(parseInt(lotId, 10), response.data.ethereum_address, {from: '0x2d42ef26b1e64733444f282f26d4547756807ffd', gas: 1000000})
     this.setState({
       newCheckpoint: response.data
     })
