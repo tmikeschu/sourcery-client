@@ -37,8 +37,8 @@ export default class ProductSearch extends Component {
         >
           View All
         </button>
-        <p style={{display: this.props.goodSearch ? 'none' : ''}}>
-          Sorry, no results.
+        <p style={{display: this.props.goodSearch ? 'none' : ''}}>		
+          Sorry, no results.		
         </p>
       </section> 
     );
