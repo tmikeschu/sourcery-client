@@ -5,7 +5,6 @@ import CreateCheckpoint from './CreateCheckpoint/CreateCheckpoint';
 import CreateLot from './CreateLot/CreateLot';
 import Mapp from './Mapp/Mapp';
 import { service } from './APIService/APIService';
-import { paths, productAddress } from './utils/static-data.js';
 import { pathsControllerContractAbi, pathsControllerAddress } from './ethereum/EthereumData';
 import './App.css';
 import Web3 from 'web3';
@@ -18,7 +17,6 @@ export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      productAddress: productAddress,
       paths: [],
       displayedPaths: [],
       query: '',
@@ -90,7 +88,7 @@ export default class App extends Component {
     this.setState({
       query: '',
       displayedPaths: [],
-      goodSearch: paths[this.state.query],
+      goodSearch: response && response.data,
       paths: (response && [response.data]) || []
     });
   }
@@ -107,16 +105,37 @@ export default class App extends Component {
     this.setState({
       newLot: lot.data
     });
+    setTimeout(() => {
+      this.setState({
+        newLot: {id: 0}
+      })
+    }, 3000);
   }
 
   async createCheckpoint(event) {
     event.preventDefault();
     const lotId = this.state.checkpoint.lotId
     const response = await this.APIService().createCheckpoint(this.state.checkpoint)
-    this.pathsController().createOrUpdatePath(parseInt(lotId, 10), response.data.ethereum_address, {from: '0x7f02d6ddd8eb6eff72c8815c5f7e515ca1d14308', gas: 1000000})
+    this.pathsController().createOrUpdatePath(parseInt(lotId, 10), response.data.ethereum_address, {from: ETHEREUM_CLIENT.eth.accounts[0], gas: 1000000})
     this.setState({
-      newCheckpoint: response.data
+      newCheckpoint: response.data,
+      checkpoint: {
+        creator: "",
+        street_address: "",
+        city: "",
+        state: "",
+        country: "",
+        lat: "",
+        lng: "",
+        zipcode: "",
+        lotId: ""
+      },
     })
+    setTimeout(() => {
+      this.setState({
+        newCheckpoint: {id: 0}
+      })
+    }, 3000);
   }
 
   updateQuery(event) {
