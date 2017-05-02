@@ -53,9 +53,13 @@ npm jest
 ```
 
 Run the end-to-end tests in Nightwatch.js independently
+
 ```javascript
 npm run e2e
 ```
+
+*Note* when running Nightwatch tests, you might run into an error involving Java
+Development Kit. If so, use your preffered package manager to download a JDK.
 
 
 Start the server
@@ -68,3 +72,4 @@ To check for build status and compatibility with Travis CI, run:
 CI=true npm test
 CI=true npm run build
 ```
+
