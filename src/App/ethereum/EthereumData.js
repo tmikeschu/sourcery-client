@@ -121,4 +121,4 @@ export const pathsControllerContractAbi = [
     }
   ];
 
-export const pathsControllerAddress = '0x515eb01337160628d29393ea57d1a1406ad628c0';
+export const pathsControllerAddress =  '0x01f4d62b18e7e63326cb657b624a9f70f6c0e6a4';

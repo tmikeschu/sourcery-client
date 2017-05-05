@@ -10,8 +10,11 @@ import './App.css';
 import Web3 from 'web3';
 
 const ETHEREUM_CLIENT = new Web3(
-  new Web3.providers.HttpProvider("http://localhost:8545")
+  new Web3.providers.HttpProvider("https://propsten.infura.io/2GSyORgenJtiVdVGEMb5")
 );
+const HDWalletProvider = require("truffle-hdwallet-provider");
+const mnemonic = "stratus handwork scouring underdog parasite dweller glove sulphuric mammal culture coastland utility"
+const provider = new HDWalletProvider(mnemonic, "https://propsten.infura.io/2GSyORgenJtiVdVGEMb5")
 
 export default class App extends Component {
   constructor(props) {
@@ -116,7 +119,7 @@ export default class App extends Component {
     event.preventDefault();
     const lotId = this.state.checkpoint.lotId
     const response = await this.APIService().createCheckpoint(this.state.checkpoint)
-    this.pathsController().createOrUpdatePath(parseInt(lotId, 10), response.data.ethereum_address, {from: ETHEREUM_CLIENT.eth.accounts[0], gas: 1000000})
+    this.pathsController().createOrUpdatePath(parseInt(lotId, 10), response.data.ethereum_address, {from: provider['address'], gas: 1000000})
     this.setState({
       newCheckpoint: response.data,
       checkpoint: {
