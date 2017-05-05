@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "axios": "^0.16.0",
+    "httpheaderprovider": "^0.3.4",
     "nightwatch": "^0.9.14",
     "prop-types": "^15.5.4",
     "react": "^15.5.4",

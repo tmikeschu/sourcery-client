@@ -9,12 +9,16 @@ import { pathsControllerContractAbi, pathsControllerAddress } from './ethereum/E
 import './App.css';
 import Web3 from 'web3';
 
-const ETHEREUM_CLIENT = new Web3(
-  new Web3.providers.HttpProvider("https://propsten.infura.io/2GSyORgenJtiVdVGEMb5")
-);
+// Provider is attempting to connect but failing, seems like a CORS error. I'm optimistic if we can
+// get past the CORS error, the deployment will work.
+const HttpHeaderProvider = require('httpheaderprovider');
+const web3 = new Web3();
 const HDWalletProvider = require("truffle-hdwallet-provider");
-const mnemonic = "stratus handwork scouring underdog parasite dweller glove sulphuric mammal culture coastland utility"
-const provider = new HDWalletProvider(mnemonic, "https://propsten.infura.io/2GSyORgenJtiVdVGEMb5")
+const header = {'Access-Control-Allow-Origin': 'origin-or-null' };
+const headerProvider = new HttpHeaderProvider("https://propsten.infura.io/2GSyORgenJtiVdVGEMb5", header);
+const ETHEREUM_CLIENT = new web3.providers.HttpProvider(headerProvider);
+const mnemonic = "stratus handwork scouring underdog parasite dweller glove sulphuric mammal culture coastland utility";
+const provider = new HDWalletProvider(mnemonic, "https://propsten.infura.io/2GSyORgenJtiVdVGEMb5");
 
 export default class App extends Component {
   constructor(props) {
