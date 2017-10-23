@@ -11,7 +11,7 @@ import './App.css';
 import Web3 from 'web3';
 
 const ETHEREUM_CLIENT = new Web3(
-  new Web3.providers.HttpProvider("http://localhost:8545")
+  new Web3.providers.HttpProvider("https://37d3d7e0.ngrok.io")
 );
 
 export default class App extends Component {
@@ -56,6 +56,7 @@ export default class App extends Component {
     this.setState({
       products: products || []
     });
+    ETHEREUM_CLIENT.eth.defaultAccount = ETHEREUM_CLIENT.eth.accounts[0];
   }
 
   APIService() {
@@ -98,12 +99,15 @@ export default class App extends Component {
   getPathFrom() {
     const lotId = parseInt(this.state.query, 10)
     const checkpoints =  this.pathsController().getPath(lotId)
+    console.log('from chain', checkpoints);
     this.findProductPaths(checkpoints)
   }
 
   async createLot(event) {
     event.preventDefault();
     const lot = await this.APIService().createLot(this.state.lot);
+    console.log(lot.data);
+    // const tx = await this.pathsController().createLot(parseInt(lot.data.id, 10), {gas: 4000000})
     this.setState({
       newLot: lot.data
     });
@@ -113,7 +117,7 @@ export default class App extends Component {
     event.preventDefault();
     const lotId = this.state.checkpoint.lotId
     const response = await this.APIService().createCheckpoint(this.state.checkpoint)
-    this.pathsController().createOrUpdatePath(parseInt(lotId, 10), response.data.ethereum_address, {from: '0x7f02d6ddd8eb6eff72c8815c5f7e515ca1d14308', gas: 1000000})
+    const tx = await this.pathsController().createOrUpdatePath(parseInt(lotId, 10), response.data.ethereum_address, {gas: 4000000})
     this.setState({
       newCheckpoint: response.data
     })
