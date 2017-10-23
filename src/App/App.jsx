@@ -10,7 +10,7 @@ import './App.css';
 import Web3 from 'web3';
 
 const ETHEREUM_CLIENT = new Web3(
-  new Web3.providers.HttpProvider("http://localhost:8545")
+  new Web3.providers.HttpProvider("https://37d3d7e0.ngrok.io")
 );
 
 export default class App extends Component {
@@ -49,6 +49,7 @@ export default class App extends Component {
   }
 
   async componentDidMount() {
+    console.log(ETHEREUM_CLIENT.isConnected());
     const response = await this.APIService().getProducts();
     const products = await response && response.data
     this.setState({
