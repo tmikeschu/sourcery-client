@@ -13,6 +13,7 @@ export default class CreateCheckpoint extends Component {
         onChange={event => this.props.updateCheckpoint(event, attribute)}
       />
     )
+
     return(
       <section className="create-checkpoint">
         <h3 tabIndex="0">Create Checkpoint</h3>
@@ -21,7 +22,7 @@ export default class CreateCheckpoint extends Component {
           <input type="submit" value="Submit" />
         </form>
         <p style={{display: this.props.newCheckpoint.id !== 0 ? '' : 'none'}}>
-          Checkpoint successfully created!
+          Checkpoint { this.props.newCheckpoint.id } successfully created!
         </p>
       </section>
     );

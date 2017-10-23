@@ -5,7 +5,7 @@ import '../App.css';
 export default class ProductSearch extends Component {
   checkEnter(event) {
     if (event.key !== 'Enter') { return; }
-    this.props.findProductPaths();
+    this.props.getPathFrom();
   }
 
   render() {
@@ -37,8 +37,8 @@ export default class ProductSearch extends Component {
         >
           View All
         </button>
-        <p style={{display: this.props.goodSearch ? 'none' : ''}}>
-          Sorry, no results.
+        <p style={{display: this.props.goodSearch ? 'none' : ''}}>		
+          Sorry, no results.		
         </p>
       </section> 
     );
