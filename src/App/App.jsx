@@ -10,7 +10,7 @@ import './App.css';
 import Web3 from 'web3';
 
 const ETHEREUM_CLIENT = new Web3(
-  new Web3.providers.HttpProvider("https://37d3d7e0.ngrok.io")
+  new Web3.providers.HttpProvider(process.env.REACT_APP_ETH_URL)
 );
 
 export default class App extends Component {

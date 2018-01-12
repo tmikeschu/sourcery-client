@@ -38,7 +38,7 @@ describe('<App />', () => {
 
   it('calls getPathFrom when the submit is clicked', () => {
     const restore = App.prototype.getPathFrom;
-    const mock = App.prototype.getPathFrom = jest.fn();
+    const mock = (App.prototype.getPathFrom = jest.fn());
     const app = mount(<App />);
     app.find('.product-search input[type="submit"]').simulate('click');
     expect(mock).toHaveBeenCalled();
@@ -47,7 +47,7 @@ describe('<App />', () => {
 
   it('calls updateQuery when an input change occurs', () => {
     const restore = App.prototype.updateQuery;
-    const mock = App.prototype.updateQuery = jest.fn();
+    const mock = (App.prototype.updateQuery = jest.fn());
     const app = mount(<App />);
     app.find('.product-search input[type="text"]').simulate('change');
     expect(mock).toBeCalled();
@@ -56,9 +56,11 @@ describe('<App />', () => {
 
   it('calls updateCheckpoint when an input change occurs', () => {
     const restore = App.prototype.updateCheckpoint;
-    const mock = App.prototype.updateCheckpoint = jest.fn();
+    const mock = (App.prototype.updateCheckpoint = jest.fn());
     const app = mount(<App />);
-    app.find('.create-checkpoint input[placeholder="creator"]').simulate('change');
+    app
+      .find('.create-checkpoint input[placeholder="creator"]')
+      .simulate('change');
     expect(mock).toHaveBeenCalledTimes(1);
     app.find('.create-checkpoint input[placeholder="lat"]').simulate('change');
     expect(mock).toHaveBeenCalledTimes(2);
@@ -67,7 +69,7 @@ describe('<App />', () => {
 
   it('calls updateLot when an input change occurs', () => {
     const restore = App.prototype.updateLot;
-    const mock = App.prototype.updateLot = jest.fn();
+    const mock = (App.prototype.updateLot = jest.fn());
     const app = mount(<App />);
     app.find('.create-lot select').simulate('change');
     expect(mock).toHaveBeenCalled();
@@ -76,7 +78,7 @@ describe('<App />', () => {
 
   it('calls viewAllPaths when button is clicked', () => {
     const restore = App.prototype.viewAllPaths;
-    const mock = App.prototype.viewAllPaths = jest.fn()
+    const mock = (App.prototype.viewAllPaths = jest.fn());
     const app = mount(<App />);
     app.instance().setState({ paths: paths[productAddress] });
     app.find('.product-search > button').simulate('click');
@@ -86,7 +88,7 @@ describe('<App />', () => {
 
   it('calls handlePathViewClick when view button is clicked', () => {
     const restore = App.prototype.handlePathViewClick;
-    const mock = App.prototype.handlePathViewClick = jest.fn();
+    const mock = (App.prototype.handlePathViewClick = jest.fn());
     const app = mount(<App />);
     app.instance().setState({ paths: paths[productAddress] });
     app.find('.product-search li#0 button').simulate('click');
@@ -96,9 +98,9 @@ describe('<App />', () => {
 
   it('calls createLot when create button is clicked', () => {
     const restore = App.prototype.createLot;
-    const mock = App.prototype.createLot = jest.fn();
+    const mock = (App.prototype.createLot = jest.fn());
     const app = mount(<App />);
-    app.instance().setState({ paths: paths[productAddress] })
+    app.instance().setState({ paths: paths[productAddress] });
     app.find('.create-lot form').simulate('submit');
     expect(mock).toBeCalled();
     App.prototype.createLot = restore;
@@ -106,9 +108,9 @@ describe('<App />', () => {
 
   it('calls createCheckpoint when create button is clicked', () => {
     const restore = App.prototype.createCheckpoint;
-    const mock = App.prototype.createCheckpoint = jest.fn();
+    const mock = (App.prototype.createCheckpoint = jest.fn());
     const app = mount(<App />);
-    app.instance().setState({ paths: paths[productAddress] })
+    app.instance().setState({ paths: paths[productAddress] });
     app.find('.create-checkpoint form').simulate('submit');
     expect(mock).toBeCalled();
     App.prototype.createCheckpoint = restore;
@@ -128,7 +130,7 @@ describe('<App />', () => {
 
   it('calls getProducts on mount', () => {
     const restore = App.prototype.APIService().getProducts;
-    const mock = App.prototype.APIService().getProducts = jest.fn();
+    const mock = (App.prototype.APIService().getProducts = jest.fn());
     const app = mount(<App />);
     expect(mock).toBeCalled();
     App.prototype.APIService().getProducts = restore;
