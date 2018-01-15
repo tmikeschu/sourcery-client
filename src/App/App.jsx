@@ -13,6 +13,8 @@ const ETHEREUM_CLIENT = new Web3(
   new Web3.providers.HttpProvider(process.env.REACT_APP_ETH_URL)
 );
 
+console.log(process.env.REACT_APP_ETH_URL);
+
 export default class App extends Component {
   constructor(props) {
     super(props)
