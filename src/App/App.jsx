@@ -1,13 +1,16 @@
-import React, { Component } from 'react';
-import Header from './Header/Header';
-import ProductSearch from './ProductSearch/ProductSearch';
-import CreateCheckpoint from './CreateCheckpoint/CreateCheckpoint';
-import CreateLot from './CreateLot/CreateLot';
-import Mapp from './Mapp/Mapp';
-import { service } from './APIService/APIService';
-import { pathsControllerContractAbi, pathsControllerAddress } from './ethereum/EthereumData';
-import './App.css';
-import Web3 from 'web3';
+import React, { Component } from "react";
+import Header from "./Header/Header";
+import ProductSearch from "./ProductSearch/ProductSearch";
+import CreateCheckpoint from "./CreateCheckpoint/CreateCheckpoint";
+import CreateLot from "./CreateLot/CreateLot";
+import Mapp from "./Mapp/Mapp";
+import { service } from "./APIService/APIService";
+import {
+  pathsControllerContractAbi,
+  pathsControllerAddress
+} from "./ethereum/EthereumData";
+import "./App.css";
+import Web3 from "web3";
 
 const ETHEREUM_CLIENT = new Web3(
   new Web3.providers.HttpProvider(process.env.REACT_APP_ETH_URL)
@@ -15,11 +18,11 @@ const ETHEREUM_CLIENT = new Web3(
 
 export default class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       paths: [],
       displayedPaths: [],
-      query: '',
+      query: "",
       goodSearch: true,
       checkpoint: {
         creator: "",
@@ -32,10 +35,10 @@ export default class App extends Component {
         zipcode: "",
         lotId: ""
       },
-      lot: { product_id: ""},
+      lot: { product_id: "" },
       products: [],
-      newLot: {id: 0},
-      newCheckpoint: {id: 0},
+      newLot: { id: 0 },
+      newCheckpoint: { id: 0 }
     };
     this.handlePathViewClick = this.handlePathViewClick.bind(this);
     this.viewAllPaths = this.viewAllPaths.bind(this);
@@ -49,9 +52,8 @@ export default class App extends Component {
   }
 
   async componentDidMount() {
-    console.log(ETHEREUM_CLIENT.isConnected());
     const response = await this.APIService().getProducts();
-    const products = await response && response.data
+    const products = (await response) && response.data;
     this.setState({
       products: products || []
     });
@@ -67,8 +69,7 @@ export default class App extends Component {
 
   pathsController() {
     return this.ethereumClient()
-      .eth
-      .contract(pathsControllerContractAbi)
+      .eth.contract(pathsControllerContractAbi)
       .at(pathsControllerAddress);
   }
 
@@ -85,9 +86,11 @@ export default class App extends Component {
   }
 
   async findProductPaths(checkpointAddresses) {
-    const response = await this.APIService().getCheckpoints(checkpointAddresses)
+    const response = await this.APIService().getCheckpoints(
+      checkpointAddresses
+    );
     this.setState({
-      query: '',
+      query: "",
       displayedPaths: [],
       goodSearch: response && response.data,
       paths: (response && [response.data]) || []
@@ -95,9 +98,9 @@ export default class App extends Component {
   }
 
   getPathFrom() {
-    const lotId = parseInt(this.state.query, 10)
-    const checkpoints =  this.pathsController().getPath(lotId)
-    this.findProductPaths(checkpoints)
+    const lotId = parseInt(this.state.query, 10);
+    const checkpoints = this.pathsController().getPath(lotId);
+    this.findProductPaths(checkpoints);
   }
 
   async createLot(event) {
@@ -108,16 +111,22 @@ export default class App extends Component {
     });
     setTimeout(() => {
       this.setState({
-        newLot: {id: 0}
-      })
+        newLot: { id: 0 }
+      });
     }, 3000);
   }
 
   async createCheckpoint(event) {
     event.preventDefault();
-    const lotId = this.state.checkpoint.lotId
-    const response = await this.APIService().createCheckpoint(this.state.checkpoint)
-    this.pathsController().createOrUpdatePath(parseInt(lotId, 10), response.data.ethereum_address, {from: ETHEREUM_CLIENT.eth.accounts[0], gas: 1000000})
+    const lotId = this.state.checkpoint.lotId;
+    const response = await this.APIService().createCheckpoint(
+      this.state.checkpoint
+    );
+    this.pathsController().createOrUpdatePath(
+      parseInt(lotId, 10),
+      response.data.ethereum_address,
+      { from: ETHEREUM_CLIENT.eth.accounts[0], gas: 1000000 }
+    );
     this.setState({
       newCheckpoint: response.data,
       checkpoint: {
@@ -130,12 +139,12 @@ export default class App extends Component {
         lng: "",
         zipcode: "",
         lotId: ""
-      },
-    })
+      }
+    });
     setTimeout(() => {
       this.setState({
-        newCheckpoint: {id: 0}
-      })
+        newCheckpoint: { id: 0 }
+      });
     }, 3000);
   }
 
@@ -166,8 +175,8 @@ export default class App extends Component {
       <div className="App">
         <Header />
         <main>
-          <ProductSearch 
-            paths={this.state.paths} 
+          <ProductSearch
+            paths={this.state.paths}
             handlePathViewClick={this.handlePathViewClick}
             viewAllPaths={this.viewAllPaths}
             getPathFrom={this.getPathFrom}
@@ -176,7 +185,7 @@ export default class App extends Component {
             goodSearch={this.state.goodSearch}
           />
           <Mapp paths={this.state.displayedPaths} />
-          <section className="create-forms" >
+          <section className="create-forms">
             <CreateCheckpoint
               createCheckpoint={this.createCheckpoint}
               updateCheckpoint={this.updateCheckpoint}
